@@ -53,3 +53,4 @@ class SalesCollection:
             return 0.0
         total = self.total_amount_by_client(client_id)
         return total / len(compras)
+#a
