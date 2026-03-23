@@ -1,5 +1,5 @@
 import csv
-from .sale import Sale
+from sale import Sale
 
 
 class SalesCollection:
@@ -32,7 +32,7 @@ class SalesCollection:
 
     def total_amount_by_client(self, client_id):
         compras = self.sales_by_client(client_id)
-        total = 0.0
+        total = 0
         for compra in compras:
             total += compra.amount
         # Devuelve el total de las ventas realizadas por el cliente especificado.
@@ -53,4 +53,4 @@ class SalesCollection:
             return 0.0
         total = self.total_amount_by_client(client_id)
         return total / len(compras)
-#a
+        # Devuelve el promedio de las ventas realizadas por el cliente especificado reutilizando el método total_amount_by_client para obtener el total y dividiéndolo por la cantidad de compras realizadas por ese cliente.

@@ -1,5 +1,5 @@
 import json
-from .client import Client
+from client import Client
 
 
 class ClientCollection:
@@ -31,5 +31,4 @@ class ClientCollection:
         for client in self.clients:
             if client.country.lower() == country.lower():
                 lista.append(client)
-        # Devuelve una lista con los clientes que pertenecen al país especificado.
         return lista
