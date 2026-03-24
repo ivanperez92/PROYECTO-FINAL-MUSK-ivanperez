@@ -1,10 +1,9 @@
-﻿from client_collection import ClientCollection
-from sales_collection import SalesCollection
-from collections import defaultdict
-import json
-import pandas as pd
+﻿from collections import defaultdict
 import os
-
+# import json
+# import pandas as pd
+from client_collection import ClientCollection
+from sales_collection import SalesCollection
 
 
 def analyze():
