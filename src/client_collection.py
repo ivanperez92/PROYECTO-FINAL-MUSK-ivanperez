@@ -1,5 +1,5 @@
 import json
-from .client import Client
+from client import Client
 
 
 class ClientCollection:

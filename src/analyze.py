@@ -1,9 +1,10 @@
-﻿from .client_collection import ClientCollection
-from .sales_collection import SalesCollection
+﻿from client_collection import ClientCollection
+from sales_collection import SalesCollection
+from collections import defaultdict
 import json
 import pandas as pd
 import os
-from collections import defaultdict
+
 
 
 def analyze():
@@ -55,30 +56,29 @@ def analyze():
 
     # 6. Cliente con mayor gasto por país: Versión mejorada y más limpia
     def cliente_mayor_gasto_por_pais(clientes_collection, ventas_collection):
-    
+
         # Agrupar clientes por país usando defaultdict (más eficiente)
         clientes_por_pais = defaultdict(list)
         for cliente in clientes_collection.clients:
             clientes_por_pais[cliente.country].append(cliente)
-        
+
         # Para cada país, encontrar el cliente con mayor gasto
         for pais, lista_clientes in clientes_por_pais.items():
             if not lista_clientes:  # Saltar si no hay clientes en este país
                 continue
-                
+
             # Usar max() con key function para encontrar el cliente con mayor gasto
-            cliente_top = max(
+            cliente_max_gasto = max(
                 lista_clientes,
-                key=lambda cliente: ventas_collection.total_amount_by_client(cliente.client_id)
+                key=lambda cliente: ventas_collection.total_amount_by_client(
+                    cliente.client_id)
             )
-            
-            # Calcular el gasto total del cliente top
-            gasto_total = ventas_collection.total_amount_by_client(cliente_top.client_id)
-            
+
             print(f"País: {pais}")
-            print(f"  Cliente: {cliente_top.name} (ID: {cliente_top.client_id})")
-            print(f"  Gasto total: {gasto_total}")
-            print()
+            print(f"Cliente: {cliente_max_gasto.name}")
 
     print("\n=== CLIENTE CON MAYOR GASTO POR PAÍS ===")
     cliente_mayor_gasto_por_pais(mis_clientes, mis_ventas)
+
+
+analyze()
