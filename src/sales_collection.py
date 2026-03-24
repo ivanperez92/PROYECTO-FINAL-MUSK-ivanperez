@@ -1,5 +1,5 @@
 import csv
-from sale import Sale
+from .sale import Sale
 
 
 class SalesCollection:
