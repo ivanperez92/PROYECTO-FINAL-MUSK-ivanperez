@@ -7,13 +7,14 @@ from sales_collection import SalesCollection
 from functional_utils import filtrar_ventas_por_categoria, extraer_mes_y_monto
 
 
-def analyze():
+def generate_report():
     # 1. CARGA DE DATOS
     mis_clientes = ClientCollection()
     mis_ventas = SalesCollection()
 
     # Obtener la ruta del directorio padre (raíz del proyecto), ya que aveces no lo lo encuentra correctamente.
-    project_root = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+    current_dir = os.path.dirname(os.path.abspath(__file__))
+    project_root = os.path.dirname(current_dir)
     clients_path = os.path.join(project_root, 'data', 'clients.json')
     sales_path = os.path.join(project_root, 'data', 'sales.csv')
 
@@ -38,7 +39,7 @@ def analyze():
         # 4. Número de ventas por cliente:
         numero_ventas = len(mis_ventas.sales_by_client(cliente.client_id))
         # 5. Promedio de ventas por cliente:
-        promedio_ventas = mis_ventas.average_sale_by_client(cliente.client_id)
+        promedio_ventas = round(mis_ventas.average_sale_by_client(cliente.client_id), 2)
 
         resumen_clientes.append({
             "client_id": cliente.client_id,
@@ -224,4 +225,4 @@ def analyze():
 
 
 if __name__ == "__main__":
-    analyze()
+    generate_report()
