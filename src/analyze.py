@@ -2,9 +2,17 @@
 import os
 import json
 import pandas as pd
-from client_collection import ClientCollection
-from sales_collection import SalesCollection
-from functional_utils import filtrar_ventas_por_categoria, extraer_mes_y_monto
+import sys
+
+# Permitir importaciones relativas y absolutas
+try:
+    from .client_collection import ClientCollection
+    from .sales_collection import SalesCollection
+    from .functional_utils import filtrar_ventas_por_categoria, extraer_mes_y_monto
+except ImportError:
+    from client_collection import ClientCollection
+    from sales_collection import SalesCollection
+    from functional_utils import filtrar_ventas_por_categoria, extraer_mes_y_monto
 
 
 def generate_report():
@@ -222,6 +230,8 @@ def generate_report():
         json.dump(reporte_final, f, indent=4, ensure_ascii=False)
 
     print(f"\n✅ PROCESO FINALIZADO. Reporte creado en: {report_path}")
+
+    return reporte_final
 
 
 if __name__ == "__main__":

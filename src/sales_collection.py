@@ -1,10 +1,14 @@
 import csv
-from sale import Sale
+
+try:
+    from .sale import Sale
+except ImportError:
+    from sale import Sale
 
 
 class SalesCollection:
-    def __init__(self):
-        self.sales = []  # Lista vacía para almacenar los objetos Sale.
+    def __init__(self, sales=None):
+        self.sales = sales if sales is not None else []  # Lista vacía para almacenar los objetos Sale.
 
     def importar_ventas_CSV(self, file_path):
         with open(file_path, 'r', encoding='utf-8') as file:

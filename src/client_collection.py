@@ -1,10 +1,14 @@
 import json
-from client import Client
+
+try:
+    from .client import Client
+except ImportError:
+    from client import Client
 
 
 class ClientCollection:
-    def __init__(self):
-        self.clients = []  # Lista vacía para almacenar los objetos Client.
+    def __init__(self, clients=None):
+        self.clients = clients if clients is not None else []  # Lista vacía para almacenar los objetos Client.
 
     def importar_clientes_JSON(self, file_path):
         with open(file_path, 'r', encoding='utf-8') as file:
