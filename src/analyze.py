@@ -1,5 +1,13 @@
-﻿from collections import defaultdict
+﻿import sys
 import os
+
+# Configurar sys.path para permitir importaciones desde el directorio raíz
+_module_dir = os.path.dirname(os.path.abspath(__file__))
+_root_dir = os.path.dirname(_module_dir)
+if _root_dir not in sys.path:
+    sys.path.insert(0, _root_dir)
+
+from collections import defaultdict
 import json
 import pandas as pd
 
