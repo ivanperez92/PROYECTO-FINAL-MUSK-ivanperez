@@ -2,7 +2,6 @@
 import os
 import json
 import pandas as pd
-import sys
 
 # Permitir importaciones relativas y absolutas
 try:
