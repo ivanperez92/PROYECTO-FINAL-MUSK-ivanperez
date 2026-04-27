@@ -1,4 +1,7 @@
-﻿import sys
+﻿import pandas as pd
+import json
+from collections import defaultdict
+import sys
 import os
 
 # Configurar sys.path para permitir importaciones desde el directorio raíz
@@ -7,9 +10,6 @@ _root_dir = os.path.dirname(_module_dir)
 if _root_dir not in sys.path:
     sys.path.insert(0, _root_dir)
 
-from collections import defaultdict
-import json
-import pandas as pd
 
 # Permitir importaciones relativas y absolutas
 try:
@@ -54,7 +54,8 @@ def generate_report():
         # 4. Número de ventas por cliente:
         numero_ventas = len(mis_ventas.sales_by_client(cliente.client_id))
         # 5. Promedio de ventas por cliente:
-        promedio_ventas = round(mis_ventas.average_sale_by_client(cliente.client_id), 2)
+        promedio_ventas = round(
+            mis_ventas.average_sale_by_client(cliente.client_id), 2)
 
         resumen_clientes.append({
             "client_id": cliente.client_id,
@@ -86,11 +87,9 @@ def generate_report():
                 continue
 
             # Usar max() para encontrar al mejor cliente
-            cliente_max_gasto = max(
-                lista_clientes,
-                key=lambda cliente: ventas_collection.total_amount_by_client(
-                    cliente.client_id)
-            )
+            # Lambda toma un cliente y devuelve el total gastado por ese cliente, max() se encarga de comparar esos totales y devolver el cliente con el mayor gasto.
+            cliente_max_gasto = max(lista_clientes, key=lambda cliente: ventas_collection.total_amount_by_client(
+                cliente.client_id))
 
             # Guardamos el nombre en el diccionario
             resultados_paises[pais] = cliente_max_gasto.name
